@@ -12,4 +12,4 @@ Route::post('/store', [CustomerController::class, 'store'])->name('store.custome
 // Route::get('/edit', [CustomerController::class, 'edit']);
 Route::delete('/delete/{id}', [CustomerController::class, 'destroy'])->name('delete.customer');
 
-//Route::resource('user', UserController::class);
+Route::resource('user', UserController::class);
