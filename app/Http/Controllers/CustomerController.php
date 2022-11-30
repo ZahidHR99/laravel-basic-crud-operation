@@ -18,6 +18,7 @@ class CustomerController extends Controller
         return view('home',compact('customer'));
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -59,7 +60,8 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        $customer=DB::table('customer_data')->where('id',$id)->first();
+        return view('show',compact('customer'));
     }
 
     /**
@@ -70,7 +72,8 @@ class CustomerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer=DB::table('customer_data')->where('id',$id)->first();
+        return view('edit',compact('customer'));
     }
 
     /**
@@ -82,7 +85,19 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'phone' => ['required'],
+        ]);
+
+        $data=array(
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'phone'=>$request->phone,
+        );
+        DB::table('customer_data')->where('id',$id)->update($data);
+        return redirect()->back()->with('success','Successfully Updated');
     }
 
     /**

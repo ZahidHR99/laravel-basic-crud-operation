@@ -55,9 +55,15 @@
                     <td>{{ $row->email }}</td>
                     <td>{{ $row->phone }}</td>
                     <td>
-                        <button type="button" class="btn btn-success btn-sm btn-rounded">Edit</button>
+                        <a href="{{ route('customer.show',$row->id) }}">
+                            <button type="button" class="btn btn-primary btn-sm btn-rounded">Show</button>
+                        </a>
+
+                        <a href="{{ route('customer.edit',$row->id) }}">
+                            <button type="button" class="btn btn-success btn-sm btn-rounded">Edit</button>
+                        </a>
                         
-                        <form action="{{ route('delete.customer',$row->id) }}" method="post">
+                        <form action="{{ route('customer.delete',$row->id) }}" method="post">
                             @csrf 
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="btn btn-danger btn-sm btn-rounded">Delete</button>
@@ -74,7 +80,7 @@
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action="{{ route('store.customer') }}" method="post">
+                    <form action="{{ route('customer.store') }}" method="post">
                         @csrf
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Add New Data</h5>
